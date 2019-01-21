@@ -1,0 +1,5 @@
+spacy==2.0.18
+gtts==2.0.3
+speech_recognition==3.8.1
+winsound
+pyttsx3
