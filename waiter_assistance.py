@@ -1,6 +1,8 @@
-from spacy.symbols import NUM, NOUN
 import spacy
-from stt_tts import tts, stt
+from spacy import displacy
+from spacy.symbols import NOUN, NUM
+
+from speech_processing import stt, tts
 
 intro_speech = 'Hello and welcome to our bar. We offer hot, and cold drinks'
 tts(intro_speech)
@@ -28,6 +30,8 @@ you_said = stt(verbose=0)
 # python -m spacy download en_core_web_sm
 nlp = spacy.load('en_core_web_sm')
 doc = nlp(you_said)
+print('Dependency tree of {} is: \n'.format(you_said))
+displacy.render(doc, style='dep')
 
 nouns = []
 for possible_subject in doc:
