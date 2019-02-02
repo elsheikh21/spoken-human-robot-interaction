@@ -2,7 +2,21 @@ import spacy
 from spacy import displacy
 from spacy.symbols import NOUN, NUM
 
+from nltk import Tree
 from speech_processing import stt, tts
+
+
+def tok_format(tok):
+    return "_".join([tok.orth_, tok.tag_])
+
+
+def to_nltk_tree(node):
+    if node.n_lefts + node.n_rights > 0:
+        return (Tree(tok_format(node),
+                     [to_nltk_tree(child) for child in node.children]))
+    else:
+        return tok_format(node)
+
 
 intro_speech = 'Hello and welcome to our bar. We offer hot, and cold drinks'
 tts(intro_speech)
@@ -25,13 +39,13 @@ for c_drink in cold_drinks:
 order_req = 'So what you want to order?'
 tts(order_req)
 
-you_said = stt(verbose=0)
+response = stt(verbose=0)
 
 # python -m spacy download en_core_web_sm
 nlp = spacy.load('en_core_web_sm')
-doc = nlp(you_said)
-print('Dependency tree of {} is: \n'.format(you_said))
-displacy.render(doc, style='dep')
+doc = nlp(response)
+
+[to_nltk_tree(sent.root).pretty_print() for sent in doc.sents]
 
 nouns = []
 for possible_subject in doc:
