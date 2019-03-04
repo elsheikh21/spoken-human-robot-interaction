@@ -24,5 +24,6 @@
    - Part-of-speech Tagging `POS`
      - to get better understanding of the text, we need to understand what are the properties -or predicates- of the nouns in a given text
 
-5. Putting it all together, this mini project was built using few strings for the bot to speak out `TTS`, and afterwards, waiting for the user input -after mic calibration- `STT`, these words from the user were analyzed using `spaCy`
+5. Putting it all together, this mini project was built using few strings for the bot to speak out `TTS`, and afterwards, waiting for the user input -after mic calibration- `STT`, these words from the user were analyzed using `spa
 
+Read more about [SHRI](docs/report.md) 
